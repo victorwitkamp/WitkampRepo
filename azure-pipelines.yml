@@ -46,6 +46,11 @@ stages:
         failOnCVSS: 8
         format: 'HTML'
 
+    - task: UseDotNet@2
+      inputs:
+        packageType: 'runtime'
+        version: '2.1.x'
+
     - task: nukeeper.nukeeper.nukeeper.NuKeeper@0
       displayName: NuKeeper
 
