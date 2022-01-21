@@ -33,7 +33,8 @@ stages:
       inputs:
         command: 'build'
         projects: |
-          $(workingDirectory)/*.csproj
+          dotnet restore
+          dotnet build
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
     - task: dependency-check-build-task@6
