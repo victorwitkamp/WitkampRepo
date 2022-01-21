@@ -6,8 +6,10 @@
 trigger:
 - master
 
+pool:
+  vmImage: 'windows-latest'
+
 variables:
-  vmImageName: 'windows-latest'
   workingDirectory: '$(System.DefaultWorkingDirectory)'
 
 stages:
@@ -16,9 +18,7 @@ stages:
 
   jobs:
   - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
+    displayName: Build job
 
     steps:
     - task: UseDotNet@2
@@ -36,6 +36,11 @@ stages:
       inputs:
         command: 'build'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
+
+    - task: DevEnvBuild@2
+      inputs:
+        solution: '*.sln'
+        vsVersion: 'latest'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
