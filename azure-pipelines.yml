@@ -37,21 +37,6 @@ stages:
         command: 'build'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
-    - task: dependency-check-build-task@6
-      inputs:
-        projectName: 'WitkampRepo'
-        scanPath: '**/*.csproj'
-        failOnCVSS: 8
-        format: 'HTML'
-
-    - task: UseDotNet@2
-      inputs:
-        packageType: 'runtime'
-        version: '2.1.x'
-
-    - task: nukeeper.nukeeper.nukeeper.NuKeeper@0
-      displayName: NuKeeper
-
     - task: ArchiveFiles@2
       displayName: 'Archive files'
       inputs:
