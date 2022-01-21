@@ -38,11 +38,12 @@ stages:
         command: 'build'
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
-    - task: DevEnvBuild@2
+
+    - task: dependency-check-build-task@6
       inputs:
-        solution: '*.sln'
-        vsVersion: 'latest'
-        buildCfg: Release
+        projectName: 'victorwitkamp.WitkampRepo'
+        scanPath: '*.sln'
+        format: 'HTML'
 
     - task: ArchiveFiles@2
       displayName: 'Archive files'
