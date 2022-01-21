@@ -27,14 +27,14 @@ stages:
         packageType: 'sdk'
         version: '6.0.x'
         includePreviewVersions: true
-
+    - task: DotNetCoreCLI@2
+      displayName: Restore
+      inputs:
+        command: 'restore'
     - task: DotNetCoreCLI@2
       displayName: Build
       inputs:
         command: 'build'
-        projects: |
-          dotnet restore
-          dotnet build
         arguments: --output $(System.DefaultWorkingDirectory)/publish_output --configuration Release
 
     - task: dependency-check-build-task@6
